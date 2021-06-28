@@ -7,7 +7,7 @@ namespace LineCommander
 {
     public interface ICommander
     {
-        Task<Dictionary<string, ICommand>> AddCommands(IEnumerable<ICommand> commands);
+        Task<IEnumerable<ICommand>> AddCommands(IEnumerable<ICommand> commands);
         Task<IEnumerable<CommandRun>> ListenForCommands();
     }
     public class Commander : ICommander
@@ -20,17 +20,19 @@ namespace LineCommander
         private Dictionary<string, ICommand> _commands;
 
         private List<CommandRun> _commandLog = new List<CommandRun>();
-        public async Task<Dictionary<string, ICommand>> AddCommands(IEnumerable<ICommand> commands)
+        public async Task<IEnumerable<ICommand>> AddCommands(IEnumerable<ICommand> commands)
         {
             _commands = new Dictionary<string, ICommand>();
             foreach (var command in commands)
             {
-                var name = command.GetType().Name.ToUpper();
-                
+                foreach (var word in command.MatchingBaseCommands())
+                {
+                    _commands.Add(word.ToUpper(), command);
+                }
                 // todo, TRY CATCH THIS to catch overwrites
-                _commands.Add(name, command);
+                
             }
-            return _commands;
+            return _commands.Values;
         }
 
         public async Task<IEnumerable<CommandRun>> ListenForCommands()
