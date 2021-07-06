@@ -1,35 +1,36 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LineCommander
 {
     public interface IConsole
     {
-        string ReadLine();
-        ConsoleKeyInfo ReadKey();
+        Task<string> ReadLine();
+        Task<ConsoleKeyInfo> ReadKey();
 
-        void WriteLine(string message);
-        void Write(string message);
+        Task WriteLine(string message);
+        Task Write(string message);
 
     }
     public class SystemConsole : IConsole
     {
-        public ConsoleKeyInfo ReadKey()
+        public async Task<ConsoleKeyInfo> ReadKey()
         {
             return Console.ReadKey();
         }
 
-        public string ReadLine()
+        public async Task<string> ReadLine()
         {
             return Console.ReadLine();
         }
 
-        public void Write(string message)
+        public async Task Write(string message)
         {
             Console.Write(message);
         }
 
-        public void WriteLine(string message)
+        public async Task WriteLine(string message)
         {
             Console.WriteLine(message);
         }
@@ -47,22 +48,22 @@ namespace LineCommander
                 Commands.Enqueue(command);
             }
         }
-        public ConsoleKeyInfo ReadKey()
+        public Task<ConsoleKeyInfo> ReadKey()
         {
             throw new NotImplementedException();
         }
 
-        public string ReadLine()
+        public async Task<string> ReadLine()
         {
             return Commands.Dequeue();
         }
 
-        public void Write(string message)
+        public async Task Write(string message)
         {
             ConsoleOutput += message;
         }
 
-        public void WriteLine(string message)
+        public async Task WriteLine(string message)
         {
             ConsoleOutput += "" + Environment.NewLine + message;
         }

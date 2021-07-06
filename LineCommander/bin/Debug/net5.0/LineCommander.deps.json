@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "LineCommander/1.0.5": {
+      "LineCommander/1.0.8": {
         "runtime": {
           "LineCommander.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "LineCommander/1.0.5": {
+    "LineCommander/1.0.8": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

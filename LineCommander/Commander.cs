@@ -40,13 +40,13 @@ namespace LineCommander
             var keepListening = true;
             while(keepListening)
             {
-                var commandText = _console.ReadLine();
+                var commandText = await _console.ReadLine();
                 keepListening = await ExecuteCommand(GetCommandInput(commandText));
             }
             return _commandLog;
         }
 
-        public async void SendCommandInput(string input)
+        public async Task SendCommandInput(string input)
         {
             await ExecuteCommand(GetCommandInput(input));
         }
@@ -83,7 +83,7 @@ namespace LineCommander
                 var command = _commands[commandName];
                 var commandRun = new CommandRun() { Command = command, Arguments = input.Arguments };
                 _commandLog.Add(commandRun);
-                return command.Execute(input.Arguments);
+                return await command.Execute(input.Arguments);
             }
             return true;
         }

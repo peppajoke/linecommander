@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LineCommander
 {
     public interface ICommand
     {
-        bool Execute(IEnumerable<string> arguments);
+        Task<bool> Execute(IEnumerable<string> arguments);
         string Description();
 
         IEnumerable<string> MatchingBaseCommands();
