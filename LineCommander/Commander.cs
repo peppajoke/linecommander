@@ -41,24 +41,32 @@ namespace LineCommander
             while(keepListening)
             {
                 var commandText = _console.ReadLine();
-                var arguments = commandText.Split(' ').ToList();
-                if (!arguments.Any())
-                {
-                    // Exit early if there is no command
-                    continue;
-                }
-                var baseCommand = arguments[0];
-                arguments.RemoveAt(0);
-
-                keepListening = await ExecuteCommand(baseCommand, arguments);
-
+                keepListening = await ExecuteCommand(GetCommandInput(commandText));
             }
             return _commandLog;
         }
 
-        private async Task<bool> ExecuteCommand(string commandName, List<string> arguments)
+        public async void SendCommandInput(string input)
         {
-            commandName = commandName.ToUpper();
+            await ExecuteCommand(GetCommandInput(input));
+        }
+
+        private CommandInput GetCommandInput(string input)
+        {
+            var arguments = input.Split(' ').ToList();
+            if (!arguments.Any())
+            {
+                // Exit early if there is no command
+                // continue;
+            }
+            var baseCommand = arguments[0];
+            arguments.RemoveAt(0);
+            return new CommandInput() { Command = baseCommand, Arguments = arguments };
+        }
+
+        private async Task<bool> ExecuteCommand(CommandInput input)
+        {
+            var commandName = input.Command.ToUpper();
             if (commandName == "H" || commandName == "HELP")
             {
                 _console.WriteLine("halp");
@@ -73,11 +81,17 @@ namespace LineCommander
             if (_commands.ContainsKey(commandName))
             {
                 var command = _commands[commandName];
-                var commandRun = new CommandRun() { Command = command, Arguments = arguments };
+                var commandRun = new CommandRun() { Command = command, Arguments = input.Arguments };
                 _commandLog.Add(commandRun);
-                return command.Execute(arguments);
+                return command.Execute(input.Arguments);
             }
             return true;
+        }
+
+        private struct CommandInput
+        {
+            public string Command;
+            public IEnumerable<string> Arguments;
         }
     }
 }

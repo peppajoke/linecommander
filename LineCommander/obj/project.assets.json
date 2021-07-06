@@ -11,7 +11,7 @@
     "C:\\Users\\jackc\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.0.1",
+    "version": "1.0.3",
     "restore": {
       "projectUniqueName": "C:\\Users\\jackc\\Documents\\GitHub\\linecommander\\LineCommander\\LineCommander.csproj",
       "projectName": "LineCommander",
