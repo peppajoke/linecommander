@@ -10,14 +10,14 @@ namespace LineCommander.Tests
 {
     public class MockUnitTests
     {
-        private Mock<ICommand> _mockSimpleCommand;
+        private Mock<BaseCommand> _mockSimpleCommand;
         private Mock<IConsole> _mockConsole;
         private Commander _commander;
 
         [SetUp]
         public void Setup()
         {
-            _mockSimpleCommand = new Mock<ICommand>();
+            _mockSimpleCommand = new Mock<BaseCommand>();
             _mockConsole = new Mock<IConsole>();
             _commander = new Commander(_mockConsole.Object);
         }
@@ -29,7 +29,7 @@ namespace LineCommander.Tests
             _mockConsole.Setup(p => p.ReadLine()).Returns("quit");
             _mockSimpleCommand.Setup(p => p.Execute(new List<string>())).Returns(true);
             
-            var cmds = await _commander.AddCommands(new List<ICommand>() { _mockSimpleCommand.Object });
+            var cmds = await _commander.AddCommands(new List<BaseCommand>() { _mockSimpleCommand.Object });
             
             Assert.AreEqual(0, cmds.Count());
 
@@ -44,7 +44,7 @@ namespace LineCommander.Tests
             _mockSimpleCommand.Setup(p => p.Execute(new List<string>())).Returns(false);
             _mockSimpleCommand.Setup(p => p.MatchingBaseCommands()).Returns(new List<string>() {"test"});
             
-            var cmds = await _commander.AddCommands(new List<ICommand>() { _mockSimpleCommand.Object });
+            var cmds = await _commander.AddCommands(new List<BaseCommand>() { _mockSimpleCommand.Object });
             //Assert.AreEqual("asdf", cmds.First().Key);
             Assert.AreEqual(1, cmds.Count());
 

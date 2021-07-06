@@ -1309,7 +1309,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "LineCommander/1.0.0": {
+      "LineCommander/1.0.5": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "compile": {
@@ -5140,7 +5140,7 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "LineCommander/1.0.0": {
+    "LineCommander/1.0.5": {
       "type": "project",
       "path": "../LineCommander/LineCommander.csproj",
       "msbuildProject": "../LineCommander/LineCommander.csproj"
@@ -5148,7 +5148,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "LineCommander >= 1.0.0",
+      "LineCommander >= 1.0.5",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "Moq >= 4.16.1",
       "NUnit >= 3.13.1",

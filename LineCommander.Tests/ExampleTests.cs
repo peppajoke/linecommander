@@ -24,7 +24,7 @@ namespace LineCommander.Tests
         [Test]
         public async Task TestExampleCommand()
         {
-            var cmds = await _commander.AddCommands(new List<ICommand>() { _command, _exitCommand });
+            var cmds = await _commander.AddCommands(new List<BaseCommand>() { _command, _exitCommand });
             _console.StageCommands(new List<string>() { "nothing", "none", "example", "ExaMpLe", "EXAMPLE", "quit"});
             var cmdLog = await _commander.ListenForCommands();
             Assert.AreEqual(3, cmdLog.Count());
@@ -33,7 +33,7 @@ namespace LineCommander.Tests
         [Test]
         public async Task TestNoCommands()
         {
-            var cmds = await _commander.AddCommands(new List<ICommand>() { _command, _exitCommand });
+            var cmds = await _commander.AddCommands(new List<BaseCommand>() { _command, _exitCommand });
             _console.StageCommands(new List<string>() { "nothing", "none", "one", "two", "three", "quit"});
             var cmdLog = await _commander.ListenForCommands();
             Assert.AreEqual(0, cmdLog.Count());
@@ -42,7 +42,7 @@ namespace LineCommander.Tests
         [Test]
         public async Task TestExitCommand()
         {
-            var cmds = await _commander.AddCommands(new List<ICommand>() { _command, _exitCommand });
+            var cmds = await _commander.AddCommands(new List<BaseCommand>() { _command, _exitCommand });
             
             _console.StageCommands(new List<string>() { "nothing", "none", "one", "exit", "three", "exit"});
             var cmdLog = await _commander.ListenForCommands();

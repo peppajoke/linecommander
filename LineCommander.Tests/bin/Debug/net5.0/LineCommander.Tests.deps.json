@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "LineCommander.Tests/1.0.0": {
         "dependencies": {
-          "LineCommander": "1.0.0",
+          "LineCommander": "1.0.5",
           "Microsoft.NET.Test.Sdk": "16.9.4",
           "Moq": "4.16.1",
           "NUnit": "3.13.1",
@@ -909,7 +909,7 @@
           }
         }
       },
-      "LineCommander/1.0.0": {
+      "LineCommander/1.0.5": {
         "runtime": {
           "LineCommander.dll": {}
         }
@@ -1398,7 +1398,7 @@
       "path": "system.xml.xpath.xmldocument/4.3.0",
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
     },
-    "LineCommander/1.0.0": {
+    "LineCommander/1.0.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

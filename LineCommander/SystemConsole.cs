@@ -12,7 +12,7 @@ namespace LineCommander
         void Write(string message);
 
     }
-    public class ConsoleProxy : IConsole
+    public class SystemConsole : IConsole
     {
         public ConsoleKeyInfo ReadKey()
         {

@@ -7,7 +7,7 @@ namespace LineCommander
 {
     public interface ICommander
     {
-        Task<IEnumerable<ICommand>> AddCommands(IEnumerable<ICommand> commands);
+        Task<IEnumerable<BaseCommand>> AddCommands(IEnumerable<BaseCommand> commands);
         Task<IEnumerable<CommandRun>> ListenForCommands();
     }
     public class Commander : ICommander
@@ -15,22 +15,22 @@ namespace LineCommander
         private IConsole _console;
         public Commander(IConsole console = null)
         {
-            _console = console ?? new ConsoleProxy();
+            _console = console ?? new SystemConsole();
         }
-        private Dictionary<string, ICommand> _commands;
+        private Dictionary<string, BaseCommand> _commands;
 
         private List<CommandRun> _commandLog = new List<CommandRun>();
-        public async Task<IEnumerable<ICommand>> AddCommands(IEnumerable<ICommand> commands)
+        public async Task<IEnumerable<BaseCommand>> AddCommands(IEnumerable<BaseCommand> commands)
         {
-            _commands = new Dictionary<string, ICommand>();
+            _commands = new Dictionary<string, BaseCommand>();
             foreach (var command in commands)
             {
+                command.SetConsole(_console);
                 foreach (var word in command.MatchingBaseCommands())
                 {
                     _commands.Add(word.ToUpper(), command);
                 }
                 // todo, TRY CATCH THIS to catch overwrites
-                
             }
             return _commands.Values;
         }
