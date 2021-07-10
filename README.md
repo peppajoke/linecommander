@@ -47,6 +47,6 @@ Example:
     await commander.AddCommands(commands);
     await commander.ListenForCommands();
   
-  Console users can now invoke "rm <file name>"
+  Console users can now invoke "rm (file name)" to delete files.
   
   
